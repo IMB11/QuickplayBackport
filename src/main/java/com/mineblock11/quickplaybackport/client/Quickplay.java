@@ -31,7 +31,7 @@ public class Quickplay {
             Entrypoint.LOGGER.error("Singleplayer world does not exist!");
             minecraft.setScreen(screen);
         } else {
-            minecraft.setScreenAndRender(new SaveLevelScreen(new TranslatableText("selectWorld.data_read")));
+            minecraft.setScreen(new SaveLevelScreen(new TranslatableText("selectWorld.data_read")));
             minecraft.startIntegratedServer(string);
         }
     }
