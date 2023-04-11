@@ -1,7 +1,10 @@
 package com.mineblock11.quickplaybackport.client;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.*;
+import net.minecraft.client.gui.screen.ConnectScreen;
+import net.minecraft.client.gui.screen.MessageScreen;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
 import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.network.ServerAddress;
@@ -41,7 +44,7 @@ public class Quickplay {
         ServerInfo serverInfo = serverList.get(string);
 
         if (serverInfo == null) {
-            serverInfo = new ServerInfo(I18n.translate("selectServer.defaultName", new Object[0]), string, false);
+            serverInfo = new ServerInfo(I18n.translate("selectServer.defaultName"), string, false);
             serverList.add(serverInfo, true);
             serverList.saveFile();
         }
