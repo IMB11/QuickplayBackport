@@ -2,7 +2,7 @@ package com.mineblock11.quickplaybackport.client;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ConnectScreen;
-import net.minecraft.client.gui.screen.MessageScreen;
+import net.minecraft.client.gui.screen.SaveLevelScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
@@ -18,7 +18,7 @@ import net.minecraft.client.realms.gui.screen.RealmsLongRunningMcoTaskScreen;
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen;
 import net.minecraft.client.realms.task.RealmsGetServerDetailsTask;
 import net.minecraft.client.resource.language.I18n;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -31,8 +31,8 @@ public class Quickplay {
             Entrypoint.LOGGER.error("Singleplayer world does not exist!");
             minecraft.setScreen(screen);
         } else {
-            minecraft.setScreenAndRender(new MessageScreen(Text.translatable("selectWorld.data_read")));
-            minecraft.createIntegratedServerLoader().start(new TitleScreen(), string);
+            minecraft.setScreenAndRender(new SaveLevelScreen(new TranslatableText("selectWorld.data_read")));
+            minecraft.startIntegratedServer(string);
         }
     }
 
@@ -41,13 +41,10 @@ public class Quickplay {
 
         ServerList serverList = new ServerList(minecraft);
         serverList.loadFile();
-        ServerInfo serverInfo = serverList.get(string);
 
-        if (serverInfo == null) {
-            serverInfo = new ServerInfo(I18n.translate("selectServer.defaultName"), string, false);
-            serverList.add(serverInfo, true);
-            serverList.saveFile();
-        }
+        ServerInfo serverInfo = new ServerInfo(I18n.translate("selectServer.defaultName"), string, false);
+        serverList.add(serverInfo);
+        serverList.saveFile();
 
         ServerAddress serverAddress = ServerAddress.parse(string);
         ConnectScreen.connect(new MultiplayerScreen(new TitleScreen()), minecraft, serverAddress, serverInfo);

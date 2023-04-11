@@ -78,7 +78,7 @@ public class Entrypoint implements PreLaunchEntrypoint, ClientModInitializer {
 
         if (Objects.equals(quickPlayArg.getLeft(), "--quickPlayRealms")) {
             final Pair<String, String> finalQuickPlayArg = quickPlayArg;
-            minecraftClientConsumer = minecraftClient -> Quickplay.joinRealmsWorld(minecraftClient, RealmsClient.createRealmsClient(minecraftClient), finalQuickPlayArg.getRight());
+            minecraftClientConsumer = minecraftClient -> Quickplay.joinRealmsWorld(minecraftClient, RealmsClient.createRealmsClient(), finalQuickPlayArg.getRight());
         }
     }
 }
