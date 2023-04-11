@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "quickplaybackport",
+  "version": "${version}",
+  "name": "QuickplayBackport",
+  "description": "Backport of the 1.20 Quickplay feature",
+  "authors": [
+    "mineblock11"
+  ],
+  "contact": {
+    "website": "https://github.com/mineblock11",
+    "repo": "https://github.com/mineblock11/QuickplayBackport"
+  },
+  "license": "MIT",
+  "icon": "assets/quickplaybackport/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.mineblock11.quickplaybackport.client.Entrypoint"
+    ],
+    "preLaunch": [
+      "com.mineblock11.quickplaybackport.client.Entrypoint"
+    ]
+  },
+  "mixins": [
+    "QuickplayBackport.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": ">=1.19 <1.20"
+  }
+}
